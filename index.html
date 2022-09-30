@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <title>Task-table</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="app">
+        <h4>Table</h4>
+        <div class="test-task">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Дата</th>
+                <th>Название</th>
+                <th>Количество</th>
+                <th>Расстояние</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="row in tableFilter"
+                :key="row"
+                :class="{visible: row.visible}"
+              >
+                <td>{{ row.item.date }}</td>
+                <td>{{ row.item.name }}</td>
+                <td>{{ row.item.amount }}</td>
+                <td>{{ row.item.distance }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="custom row">
+            <div class="input-field col s4">
+              <select class="browser-default" v-model="selectColumn">
+                <option value="" disabled selected>Выбор колонки</option>
+                <option>Название</option>
+                <option>Количество</option>
+                <option>Расстояние</option>
+              </select>
+            </div>
+            <div class="input-field col s4">
+              <select class="browser-default" v-model="selectOption">
+                <option value="" disabled selected>Выбор условия</option>
+                <option>Равно</option>
+                <option>Содержит</option>
+                <option>Больше</option>
+                <option>Меньше</option>
+              </select>
+            </div>
+            <div class="row col s4">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12 custom-form">
+                    <input
+                      placeholder="Ваш запрос..."
+                      type="text"
+                      class="validate"
+                      v-model="input"
+                      @input="showBtnPag"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <button @click="resetOption" class="btn">Сброс фильтров</button>
+            <button @click="moreContent" class="btn right" v-if="showButton">
+              Показать еще...
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
